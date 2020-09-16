@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+	<meta name="theme-color" content="#313759">
+
+	<link rel="stylesheet" href="css/style.css">
+	<title>Supax</title>
+</head>
+
+<body>
+	<div class="navbar hide" id="navbar">
+		<div class="collapse">
+			<div class="collapse-link">
+				<a onclick="showCollapse()" class="menu"><i class="fas fa-bars"></i></a>
+			</div>
+			<div class="title">
+				<h1>SUP<b>AX</b></h1>
+			</div>
+		</div>
+		<ul class="nav hide">
+			<li class="nav-item">
+				<a href="#" class="nav-link" onclick="changeForm(this)">Abertura</a>
+			</li>
+			<li class="nav-item">
+				<a href="#" class="nav-link" onclick="changeForm(this)">Fechamento</a>
+			</li>
+		</ul>
+	</div>
+	<div class="container">
+		<div class="sidebar" id="sidebar">
+			<div class="title">
+				<h1>SUP<b>AX</b></h1>
+			</div>
+			<h3 class="nav-title">Chamados</h3>
+			<ul class="nav">
+				<li class="nav-item">
+					<a href="#" class="nav-link active" onclick="changeForm(this)"><i class="fas fa-circle-notch"></i>Abertura</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link" onclick="changeForm(this)"><i class="fas fa-circle"></i>Fechamento</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link" onclick="changeForm(this)"><i class="fas fa-user-plus"></i>Ativação</a>
+				</li>
+
+				<li class="nav-item">
+					<a href="#" class="nav-link" onclick="changeForm(this)"><i class="fas fa-percentage"></i>Solicitação
+						de Desconto</a>
+				</li>
+			</ul>
+		</div>
+		<div class="content">
+			<form action="#" onsubmit="return openCall(this)" class="form" id="abertura">
+				<div class="form-title">
+					<p>Abertura de Chamado</p>
+				</div>
+				<div class="field-set">
+					<h2 class="title">Informações do Cliente</h2>
+					<div class="field">
+						<label for="contact">Nome / Contato</label>
+						<input type="text" name="contact" id="contact" class="text-field">
+					</div>
+					<div class="field">
+						<label for="phone">Telefone</label>
+						<input type="text" name="phone" id="phone" class="text-field">
+					</div>
+					<div class="field">
+						<label for="cell">Celular</label>
+						<input type="text" name="cell" id="cell" class="text-field">
+					</div>
+				</div>
+				<div class="field-set">
+					<h2 class="title">Informações do Chamado</h2>
+					<div class="field">
+						<label for="request">Solicitação / Incidente</label>
+						<select id=request name="request" class="text-field select-field">
+							<option value="indis">Indisponibilidade</option>
+							<option value="webacess">Acesso a Site</option>
+							<option value="slow">Degradação/Lentidão</option>
+							<option value="variable">Intermitência</option>
+							<option value="change1title">Mudança de Titularidade</option>
+							<option value="changepp">Mudança de Topologia PPPOE</option>
+							<option value="changewifi">Mudança de Topologia Wifi</option>
+							<option value="offrequest">Solicitação de Desconto</option>
+							<option value="phoneaut">Telefonia Autenticação</option>
+							<option value="switchchange">Troca de Equipamento</option>
+							<option value="intra">Interno</option>
+							<option value="others">Outras</option>
+						</select>
+					</div>
+					<div class="field">
+						<label for="contract">Contrato</label>
+						<input type="text" name="contract" id="contract" class="text-field">
+					</div>
+					<div class="field">
+						<label for="fixedCall">Chamado Vinculado</label>
+						<input type="text" name="fixedCall" id="fixedCall" class="text-field">
+					</div>
+				</div>
+				<div class="field-set">
+					<h2 class="title">Informações Gerais</h2>
+					<div class="field">
+						<label for="observation">Observações Adicionais</label>
+						<textarea name="observation" id="observation" class="text-field text-area"></textarea>
+						<div class="buttons">
+							<input type="button" value="Indisponibilidade" class="btn btn-neutral" id="ind"
+								onclick="defaultMessage(this)">
+							<input type="button" value="Lentidão" class="btn btn-neutral" id="len" onclick="defaultMessage(this)">
+							<input type="button" value="Problemas na telefonia" class="btn btn-neutral" id="tel"
+								onclick="defaultMessage(this)">
+						</div>
+					</div>
+
+				</div>
+				<div class="buttons">
+					<input type="reset" value="Limpar" class="btn btn-neutral">
+					<input type="submit" value="Gerar" class="btn">
+				</div>
+				<div class="field-set result">
+					<h2 class="title">Resultado</h2>
+					<div class="field">
+						<textarea name="result" id="result" class="text-field text-area"></textarea>
+					</div>
+					<input type="button" value="Copiar" class="btn btn-copy" onclick="copy(this)">
+				</div>
+			</form>
+			<form action="#" onsubmit="return closeCall(this)" class="form hide" id="fechamento">
+				<div class="form-title">
+					<p>Fechamento de Chamado</p>
+				</div>
+				<div class="field-set">
+					<h2 class="title">Informações do Chamado</h2>
+					<div class="field">
+						<label for="equipchange">Houve troca de equipamento?</label>
+						<div class="radios">
+							<input type="radio" name="equipchange" id="equiptrue" value="Sim" class="radio" checked>
+							<label for="equiptrue" class="lblradio btn btn-neutral">Sim</label>
+							</input>
+							<input type="radio" name="equipchange" id="equipfalse" value="Não" class="radio ">
+							<label for="equipfalse" class="lblradio btn btn-neutral">Não</label>
+							</input>
+						</div>
+					</div>
+					<div class="field">
+						<label for="solution">Caso solucionado? </label>
+						<div class="radios">
+							<input type="radio" name="solution" id="solutiontrue" value="Sim" class="radio" checked>
+							<label for="solutiontrue" class="lblradio btn btn-neutral">Sim</label>
+							</input>
+							<input type="radio" name="solution" id="solutionfalse" value="Não" class="radio ">
+							<label for="solutionfalse" class="lblradio btn btn-neutral">Não</label>
+							</input>
+						</div>
+					</div>
+				</div>
+				<div class="field-set">
+					<h2 class="title">Homologação</h2>
+					<div class="field">
+						<label for="client">Com quem foi homologado?</label>
+						<input type="text" name="client" id="client" class="text-field">
+					</div>
+					<div class="field">
+						<label for="requestClose">Qual foi o incidente/solicitação?</label>
+						<select id=requestClose name="request" class="text-field select-field">
+							<option value="indis">Indisponibilidade</option>
+							<option value="webacess">Acesso a Site</option>
+							<option value="slow">Degradação/Lentidão</option>
+							<option value="variable">Intermitência</option>
+							<option value="change1title">Mudança de Titularidade</option>
+							<option value="changepp">Mudança de Topologia PPPOE</option>
+							<option value="changewifi">Mudança de Topologia Wifi</option>
+							<option value="offrequest">Solicitação de Desconto</option>
+							<option value="phoneaut">Telefonia Autenticação</option>
+							<option value="switchchange">Troca de Equipamento</option>
+							<option value="intra">Interno</option>
+							<option value="others">Outras</option>
+						</select>
+					</div>
+					<div class="field">
+						<label for="departament">Qual departamento resolveu?</label>
+						<input type="text" name="departament" id="departament" class="text-field">
+					</div>
+				</div>
+				<div class="field-set">
+					<h2 class="title">Informações Gerais</h2>
+					<div class="field">
+						<label for="resolution">O que foi feito para resolver?</label>
+						<textarea name="resolution" id="resolution" class="text-field text-area"></textarea>
+					</div>
+				</div>
+				<div class="buttons">
+					<input type="reset" value="Limpar" class="btn btn-neutral">
+					<input type="submit" value="Gerar" class="btn">
+				</div>
+				<div class="field-set result">
+					<h2 class="title">Resultado</h2>
+					<div class="field">
+						<textarea name="result" id="resultClose" class="text-field text-area"></textarea>
+					</div>
+					<input type="button" value="Copiar" class="btn btn-copy" onclick="copy(this)">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="https://kit.fontawesome.com/812e771e48.js" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/imask"></script>
+
+	<script src="js/index.js"></script>
+	<script src="js/nav.js"></script>
+</body>
+
+</html>
